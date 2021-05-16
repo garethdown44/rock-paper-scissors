@@ -36,8 +36,7 @@ export const countdownEpic = (action$: any) => action$.pipe(
   filter((action: Action) => action.type === 'PLAY'),
   switchMap(() => interval(1000).pipe(
     takeWhile(count => count < 4),
-    map(x => countdown(3 - x)),
-    tap(x => console.log(x))
+    map(x => countdown(3 - x))
   ))
 )
 

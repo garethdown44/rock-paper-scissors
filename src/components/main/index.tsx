@@ -7,14 +7,16 @@ type Props = {
   result?: Result
   playerWeapon: Weapon
   aiWeapon?: Weapon
+  play: (weapon: Weapon) => void
 }
 
-export default function Main({ playerWeapon, aiWeapon, result }: Props) {
+export default function Main({ playerWeapon, aiWeapon, result, play }: Props) {
   return (
     <div>
       <Player
         weapon={playerWeapon}
         result={result}
+        play={play}
       />
 
       <Ai

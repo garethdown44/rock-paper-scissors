@@ -13,7 +13,9 @@ export default function Start({ onShoot }: Props) {
         Choose:
       </Instruction>
       <WeaponsWrapper>
-        <Arsenal onShoot={onShoot} />
+        <Arsenal
+          onShoot={onShoot}
+        />
       </WeaponsWrapper>
     </Box>
   )

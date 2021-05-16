@@ -34,6 +34,7 @@ function Game() {
       result={gameState.result}
       playerWeapon={gameState.playerWeapon!}
       aiWeapon={gameState.aiWeapon}
+      play={weaponName => dispatch(play(weaponName))}
     />
   )
 }

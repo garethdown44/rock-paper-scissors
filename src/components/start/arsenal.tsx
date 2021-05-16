@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Weapon } from '../../types'
 import { Rock, Paper, Scissors } from './weapons'
-import { Button } from '../primitives'
+import { Button } from '../common/primitives'
 
 const Wrapper = styled.div`
   display: flex;
