@@ -1,5 +1,5 @@
-import { interval, timer } from 'rxjs'
-import { filter, delay, mapTo, switchMap, map, takeUntil, takeWhile, mergeMap, tap } from 'rxjs/operators'
+import { concat, interval, of, timer } from 'rxjs'
+import { filter, switchMap, map, take } from 'rxjs/operators'
 import { Weapon } from '../../../types'
 import determineResult from './determine-result'
 
@@ -34,16 +34,16 @@ export const play = (weapon: Weapon) : PlayAction => ({ type: 'PLAY', weapon })
 
 export const countdownEpic = (action$: any) => action$.pipe(
   filter((action: Action) => action.type === 'PLAY'),
-  switchMap(() => interval(1000).pipe(
-    takeWhile(count => count < 4),
-    map(x => countdown(3 - x))
-  ))
-)
+  switchMap(() => {
+    const count = interval(1000).pipe(
+        take(4),
+        map(x => 3 - x),
+        map(x => countdown(x),
+      )
+    )
 
-export const drawEpic = (action$: any) => action$.pipe(
-  filter((action: Action) => action.type === 'COUNTDOWN' && action.value === 1),
-  delay(1000),
-  mapTo(draw('rock')),
+    return concat(count, of(draw('rock')))
+  })
 )
 
 export type Result = 'WIN' | 'LOSE' | 'DRAW'
@@ -76,7 +76,9 @@ export default (state: GameState = initialState, action: Action) : GameState => 
       return {
         ...state,
         status: 'COUNTING_DOWN',
-        playerWeapon: action.weapon
+        result: undefined,
+        playerWeapon: action.weapon,
+        aiWeapon: undefined
       }
     case 'COUNTDOWN':
       return {

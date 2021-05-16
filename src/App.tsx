@@ -29,12 +29,15 @@ function Game() {
     )
   }
 
+  console.log(gameState)
+
   return (
     <Main
       result={gameState.result}
       playerWeapon={gameState.playerWeapon!}
       aiWeapon={gameState.aiWeapon}
       play={weaponName => dispatch(play(weaponName))}
+      countdownValue={gameState.countdownValue}
     />
   )
 }
