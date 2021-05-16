@@ -1,5 +1,5 @@
 import { Weapon } from '../../types'
-import Weapons from '../weapons'
+import Arsenal from './arsenal'
 import { Box, Instruction, WeaponsWrapper } from './primitives'
 
 export type Props = {
@@ -13,7 +13,7 @@ export default function Start({ onShoot }: Props) {
         Choose:
       </Instruction>
       <WeaponsWrapper>
-        <Weapons onShoot={onShoot} />
+        <Arsenal onShoot={onShoot} />
       </WeaponsWrapper>
     </Box>
   )
