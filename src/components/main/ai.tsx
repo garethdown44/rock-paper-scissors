@@ -1,19 +1,31 @@
 import { Weapon } from '../../types'
 import { Result } from '../../redux/modules/game/game'
 import { Box } from './primitives'
-import { Rock } from './weapons/index';
+import WeaponView from './weapons/index';
 
 export type Props = {
-  weapon: Weapon
-  status: 'COUNTING_DOWN' | 'FINISHED'
-  count: number
-  result: Result
+  weapon?: Weapon
+  countdownValue?: number
+  result?: Result
 }
 
-export default function Ai({ weapon, result }: Props) {
+function Show(props: Props) {
+  if (!props.result) {
+    return <div>{props.countdownValue}</div>
+  }
+
+  return (
+    <WeaponView
+      name={props.weapon!}
+      result={props.result}
+    />
+  )
+}
+
+export default function Ai(props: Props) {
   return (
     <Box>
-      <Rock />
+      <Show {...props} />
     </Box>
   )
 }

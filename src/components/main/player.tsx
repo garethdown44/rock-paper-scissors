@@ -2,10 +2,10 @@ import { Weapon } from '../../types'
 import { Result } from '../../redux/modules/game/game'
 import { Box } from './primitives'
 import WeaponView from './weapons/index';
+import ReplayControls from './replay-controls';
 
 export type Props = {
   weapon: Weapon
-  status: 'COUNTING_DOWN' | 'FINISHED'
   result?: Result
 }
 
@@ -16,6 +16,8 @@ export default function Player({ weapon, result }: Props) {
         name={weapon}
         result={result}
       />
+
+      {result && <ReplayControls />}
     </Box>
   )
 }
