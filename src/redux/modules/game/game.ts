@@ -3,6 +3,7 @@ import { filter, switchMap, map, take } from 'rxjs/operators'
 import { Weapon } from '../../../types'
 import determineResult from './determine-result'
 import randomWeapon from './random-weapon'
+import updateTotals from './update-totals'
 
 type PingAction = {
   type: 'PING'
@@ -49,17 +50,19 @@ export const playEpic = (action$: any) => action$.pipe(
 
 export type Result = 'WIN' | 'LOSE' | 'DRAW'
 
+export type Totals = {
+  wins: number
+  losses: number
+  draws: number
+}
+
 export type GameState = {
   status: 'START' | 'COUNTING_DOWN' | 'FINISHED'
   playerWeapon?: Weapon
   aiWeapon?: Weapon
   countdownValue?: number
   result?: Result
-  totals: {
-    wins: number
-    losses: number
-    draws: number
-  }
+  totals: Totals
 }
 
 export const initialState : GameState = {
@@ -71,7 +74,7 @@ export const initialState : GameState = {
   }
 }
 
-export default (state: GameState = initialState, action: Action) : GameState => {
+export default function reducer(state: GameState = initialState, action: Action) : GameState {
   switch (action.type) {
     case 'PLAY':
       return {
@@ -88,12 +91,15 @@ export default (state: GameState = initialState, action: Action) : GameState => 
         countdownValue: action.value
       }
     case 'DRAW':
+      const result = determineResult(state.playerWeapon!, action.aiWeapon)
+      
       return {
         ...state,
         status: 'FINISHED',
         aiWeapon: action.aiWeapon,
-        result: determineResult(state.playerWeapon!, action.aiWeapon),
-        countdownValue: undefined
+        result,
+        countdownValue: undefined,
+        totals: updateTotals(state.totals, result)
       }
     default:
       return state;

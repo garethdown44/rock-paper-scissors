@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { Game } from '../App'
+import { Game } from '../game'
 import reducer, { initialState, play, countdown, draw } from '../redux/modules/game/game'
 
 test('shows the start screen at first', () => {
@@ -77,3 +77,46 @@ test('is a draw if player and ai choose paper', () => {
   const win = screen.getByText('DRAW')
   expect(win).toBeVisible()
 })
+
+test('adds wins to the totals', () => {
+  const startState = { ...initialState }
+  const actions = [
+    play('paper'),
+    draw('rock')
+  ]
+
+  const endState = actions.reduce(reducer, startState)
+
+  render(<Game state={endState} dispatch={jest.fn()} />)
+  const count = screen.getByTestId('won')
+  expect(count.textContent).toBe('Won:1')
+})
+
+test('adds a loss to the total', () => {
+  const startState = { ...initialState }
+  const actions = [
+    play('paper'),
+    draw('scissors')
+  ]
+
+  const endState = actions.reduce(reducer, startState)
+
+  render(<Game state={endState} dispatch={jest.fn()} />)
+  const count = screen.getByTestId('lost')
+  expect(count.textContent).toBe('Lost:1')
+})
+
+test('adds a draw to the total', () => {
+  const startState = { ...initialState }
+  const actions = [
+    play('paper'),
+    draw('paper')
+  ]
+
+  const endState = actions.reduce(reducer, startState)
+
+  render(<Game state={endState} dispatch={jest.fn()} />)
+  const count = screen.getByTestId('draw')
+  expect(count.textContent).toBe('Draw:1')
+})
+

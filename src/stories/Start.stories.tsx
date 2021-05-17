@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import Start, { Props } from '../components/start'
 
 export default {
-  title: 'Start',
+  title: 'Start/Start',
   component: Start,
   argTypes: {
     onShoot: { }

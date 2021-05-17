@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Rock, Paper, Scissors
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Deployed at
 
-## Available Scripts
+https://q-rock-paper-scissors.web.app/
 
-In the project directory, you can run:
+### How to run/test locally
 
-### `npm start`
+```
+npm install
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Run Storybook
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+npm run storybook
+```
 
-### `npm test`
+### Run tests
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm test
+```
 
-### `npm run build`
+## Notes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I used create-react-app as the base, with typescript.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Because of the countdown, I know that setTimeout/setInterval are not accurate so I thought of using Rx which guarantees the intervals are correct.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+I therefore decided to use the opportunity to try out redux-observable - something that's been on my radar to try out for a while. It's possibly overkill for the use-case; I could have just used Rx with redux-thunk or searched for another timer library that guarantees accuracy, but as I say I took the opportunity to try it out redux-observable.
 
-### `npm run eject`
+I did consider trying out x-state as I've seen that you use that, however I didn't want to go down a rabbit hole with something I didn't already know. With redux-observable I already knew Redux and RxJS so the redux-observable part is just a thin layer on top of those.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## What I would have added/finished with more time
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. I'm aware that visually it's not that accurate to the specs - especially font weights and padding. I'd have spent more time getting this accurate in a real world project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. The Start page icons and the replay icons could have been merged together. This was on my list to do and probably wouldn't have taken that long, but I just wanted to finish and thought it was probably sufficient if I just explained I would have done it.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. I wanted to have a test for the countdown, using the Rx TestScheduler.
 
-## Learn More
+4. Better code organisation - I've got some styled components in "primitives.tsx" but then some are inline within other components.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. Accessibility - specifically being able to tab around, alt text.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Stretch goals
+
+1. Mobile support. I wanted to make it responsive so that you could play it on a mobile device. I did start this off, but didn't get that far. It would have required quite a bit of work changing the sizes of the icons and boxes.
+
+2. Page speed - The code could have been split so the initial screen loads first, then the main game is a separate bundle.

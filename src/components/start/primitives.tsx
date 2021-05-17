@@ -13,10 +13,12 @@ export const Box = styled.div`
 
 export const Instruction = styled.div`
   text-align: center;
-  font: normal normal 44px/53px Helvetica Neue, Light;
-  font-weight: light;
+  font-family: Helvetica Neue;
+  font-weight: 300;
+  font-size: 44px;
   letter-spacing: 0px;
   color: #666666;
+  padding-bottom: 35px;
 `
 
 export const WeaponsWrapper = styled.div`

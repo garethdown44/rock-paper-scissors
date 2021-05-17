@@ -1,20 +1,21 @@
 import Player from './player'
 import Ai from './ai'
-import { Result } from '../../redux/modules/game/game'
+import { Result, Totals } from '../../redux/modules/game/game'
 import { Weapon } from '../../types'
 import styled from 'styled-components'
-import ResultIndicator from './result-indicator';
-import { StyledHeading } from './primitives';
+import ResultIndicator from './result-indicator'
+import TotalView from './totals'
 
 export type Props = {
   result?: Result
   playerWeapon: Weapon
   aiWeapon?: Weapon
   countdownValue?: number
+  totals: Totals
   play: (weapon: Weapon) => void
 }
 
-const Layout = styled.div`
+const PlayAreaLayout = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -29,25 +30,44 @@ const Layout = styled.div`
   }
 `
 
-export default function Main({ playerWeapon, aiWeapon, result, countdownValue, play }: Props) {
+const MainLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const TotalsWrapper = styled.div`
+  margin-top: 50px;
+`
+
+export default function Main({ playerWeapon, aiWeapon, result, countdownValue, totals, play }: Props) {
   return (
-    <Layout>
-      <Player
-        weapon={playerWeapon}
-        result={result}
-        play={play}
-      />
+    <MainLayout>
+      <PlayAreaLayout>
+        <Player
+          weapon={playerWeapon}
+          result={result}
+          play={play}
+        />
 
-      <ResultIndicator
-        result={result}
-      />
+        <ResultIndicator
+          result={result}
+        />
 
-      <Ai
-        weapon={aiWeapon}
-        result={invertResult(result)}
-        countdownValue={countdownValue}
-      />
-    </Layout>
+        <Ai
+          weapon={aiWeapon}
+          result={invertResult(result)}
+          countdownValue={countdownValue}
+        />
+      </PlayAreaLayout>
+      <TotalsWrapper>
+        <TotalView
+          wins={totals.wins}
+          draws={totals.draws}
+          losses={totals.losses}
+        />
+      </TotalsWrapper>
+    </MainLayout>
   )
 }
 
