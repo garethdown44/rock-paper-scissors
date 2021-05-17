@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Weapon } from '../../types'
 import { Result } from '../../redux/modules/game/game'
-import { Wrapper, Box, StyledHeading } from './primitives'
+import { Wrapper, AiBox, StyledHeading } from './primitives'
 import WeaponView from './weapons/index'
 
 export type Props = {
@@ -17,39 +17,37 @@ const CountdownValue = styled.div`
   color: #4C9BDE;
 `
 
-const WithMargin = styled.div<{ isFinished: boolean }>`
-  transition: margin-bottom .2s ease-out;
-  margin-bottom: ${props => props.isFinished ? '60px' : '0px'};
-  /* margin-bottom: '60px'; */
-`
-
 function Show(props: Props) {
-  console.log('SHOW', props)
   if (!props.result) {
     return (
-      <CountdownValue>{props.countdownValue}</CountdownValue>
+      <CountdownValue role="timer">{props.countdownValue}</CountdownValue>
     )
   }
 
   return (
-    <WithMargin isFinished={props.result !== undefined}>
-      <WeaponView
-        name={props.weapon!}
-        result={props.result}
-        />
-    </WithMargin> 
+    <WeaponView
+      name={props.weapon!}
+      result={props.result}
+    />
   )
 }
 
+const WeaponWrapper = styled.div<{ isFinished: boolean }>`
+  transition: margin-bottom .2s ease-out;
+  margin-bottom: ${props => props.isFinished ? '140px' : '40px'};
+`
+
 export default function Ai(props: Props) {
   return (
-    <Wrapper>
+    <Wrapper title="AI">
       <StyledHeading>
           AI
       </StyledHeading>
-      <Box>
-        <Show {...props} />
-      </Box>
+      <AiBox>
+        <WeaponWrapper isFinished={!!props.result}>
+          <Show {...props} />
+        </WeaponWrapper>
+      </AiBox>
     </Wrapper>
   )
 }

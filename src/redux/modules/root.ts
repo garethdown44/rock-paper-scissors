@@ -1,9 +1,9 @@
 import { combineEpics } from 'redux-observable'
 import { combineReducers } from 'redux'
-import game, { countdownEpic } from './game/game'
+import game, { playEpic } from './game/game'
 
 export const rootEpic = combineEpics(
-  countdownEpic
+  playEpic
 )
 
 export const rootReducer = combineReducers({

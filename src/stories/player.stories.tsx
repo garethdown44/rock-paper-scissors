@@ -6,9 +6,18 @@ export default {
   title: 'Main/Player',
   component: Player,
   argTypes: {
-    weapon: {},
-    status: {},
-    result: {}
+    weapon: {
+      control: {
+        type: 'radio',
+        options: ['rock', 'paper', 'scissors']
+      }
+    },
+    result: {
+      control: {
+        type: 'radio',
+        options: ['WIN', 'LOSE', 'DRAW', undefined]
+      }
+    }
   }
 } as Meta
 

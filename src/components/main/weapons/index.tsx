@@ -10,7 +10,7 @@ export type WeaponViewProps = {
 
 export default function WeaponView({ name, result }: WeaponViewProps) {
   return (
-    <SvgContainer result={result}>
+    <SvgContainer title={name} result={result}>
       {getComponent(name)}
     </SvgContainer>
   )

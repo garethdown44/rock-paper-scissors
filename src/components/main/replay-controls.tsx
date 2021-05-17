@@ -4,12 +4,10 @@ import { Rock, Paper, Scissors } from '../common/index';
 import { Weapon } from '../../types';
 
 export type Props = {
-  isVisible: boolean
   play: (weapon: Weapon) => void
 }
 
-const Wrapper = styled.div<{ isVisible: boolean}>`
-  visibility: ${props => props.isVisible ? 'visible' : 'hidden'};
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,9 +22,9 @@ const StyledHeading = styled.h2`
   color: #666666;
 `
 
-export default function ReplayControls ({ isVisible, play }: Props) {
+export default function ReplayControls ({ play }: Props) {
   return (
-    <Wrapper isVisible={isVisible}>
+    <Wrapper>
       <StyledHeading>Play Again:</StyledHeading>
       <div>
         <Button onClick={() => play('rock')}>

@@ -1,7 +1,8 @@
-import { concat, interval, of, timer } from 'rxjs'
+import { concat, of, timer } from 'rxjs'
 import { filter, switchMap, map, take } from 'rxjs/operators'
 import { Weapon } from '../../../types'
 import determineResult from './determine-result'
+import randomWeapon from './random-weapon'
 
 type PingAction = {
   type: 'PING'
@@ -26,23 +27,23 @@ type DrawAction = {
   aiWeapon: Weapon
 }
 
-type Action = PingAction | PongAction | PlayAction | CountdownAction | DrawAction
+export type Action = PingAction | PongAction | PlayAction | CountdownAction | DrawAction
 
-const countdown = (value: number) : CountdownAction => ({ type: 'COUNTDOWN', value })
-const draw = (aiWeapon: Weapon): DrawAction => ({ type: 'DRAW', aiWeapon })
+export const countdown = (value: number) : CountdownAction => ({ type: 'COUNTDOWN', value })
+export const draw = (aiWeapon: Weapon): DrawAction => ({ type: 'DRAW', aiWeapon })
 export const play = (weapon: Weapon) : PlayAction => ({ type: 'PLAY', weapon })
 
-export const countdownEpic = (action$: any) => action$.pipe(
+export const playEpic = (action$: any) => action$.pipe(
   filter((action: Action) => action.type === 'PLAY'),
   switchMap(() => {
-    const count = interval(1000).pipe(
+    const count = timer(0, 1000).pipe(
         take(4),
         map(x => 3 - x),
-        map(x => countdown(x),
+        map(x => countdown(x)
       )
     )
 
-    return concat(count, of(draw('rock')))
+    return concat(count, of(draw(randomWeapon())))
   })
 )
 
@@ -61,7 +62,7 @@ export type GameState = {
   }
 }
 
-const initialState : GameState = {
+export const initialState : GameState = {
   status: 'START',
   totals: {
     wins: 0,
@@ -91,7 +92,8 @@ export default (state: GameState = initialState, action: Action) : GameState => 
         ...state,
         status: 'FINISHED',
         aiWeapon: action.aiWeapon,
-        result: determineResult(state.playerWeapon!, action.aiWeapon)
+        result: determineResult(state.playerWeapon!, action.aiWeapon),
+        countdownValue: undefined
       }
     default:
       return state;

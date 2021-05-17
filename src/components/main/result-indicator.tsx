@@ -13,8 +13,9 @@ const StyledDiv = styled.div < { isVisible: boolean }>`
   color: #5E6972;
   visibility: ${props => props.isVisible ? 'visible' : 'hidden' };
   width: 260px;
-  /* padding: 0 10px; */
   text-align: center;
+  padding: 0 10px;
+  margin-top: 60px;
 `
 
 export default function ResultIndicator ({ result }: Props) {

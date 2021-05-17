@@ -3,25 +3,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import MainContainer from './components/main-container'
 import Start from './components/start'
 import Main from './components/main'
-import { GameState, play } from './redux/modules/game/game'
-
-type AppState = {
-  game: GameState
-}
+import { play, GameState, Action } from './redux/modules/game/game';
+import { AppState } from './redux/store'
+import { Dispatch } from 'redux'
 
 function App() {
+  const gameState = useSelector((state: AppState) => state.game)
+  const dispatch = useDispatch<Dispatch<Action>>()
+
   return (
     <MainContainer>
-      <Game />
+      <Game
+        state={gameState}
+        dispatch={dispatch} />
     </MainContainer>
   )
 }
 
-function Game() {
-  const gameState = useSelector((state: AppState) => state.game)
-  const dispatch = useDispatch()
+type GameProps = {
+  state: GameState
+  dispatch: Dispatch<Action>
+}
 
-  if (gameState.status === 'START') {
+export function Game({ state, dispatch } : GameProps) {
+  if (state.status === 'START') {
     return (
       <Start
         onShoot={weaponName => dispatch(play(weaponName))}
@@ -29,15 +34,13 @@ function Game() {
     )
   }
 
-  console.log(gameState)
-
   return (
     <Main
-      result={gameState.result}
-      playerWeapon={gameState.playerWeapon!}
-      aiWeapon={gameState.aiWeapon}
+      result={state.result}
+      playerWeapon={state.playerWeapon!}
+      aiWeapon={state.aiWeapon}
       play={weaponName => dispatch(play(weaponName))}
-      countdownValue={gameState.countdownValue}
+      countdownValue={state.countdownValue}
     />
   )
 }
