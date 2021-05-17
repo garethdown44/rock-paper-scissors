@@ -7,11 +7,6 @@ export type IconProps = {
   size: 'small' | 'large'
 }
 
-const sizes = {
-  small: 60,
-  large: 134
-}
-
 const StyledImage = styled.img<IconProps>`
   width: ${props => props.size === 'small' ? '60px' : '134px'};
   height: ${props => props.size === 'small' ? '60px' : '134px'};
