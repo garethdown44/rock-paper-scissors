@@ -3,7 +3,11 @@ import { filter, switchMap, map, take } from 'rxjs/operators'
 import { Action, CountdownAction, DrawAction, PlayAction } from './action-types'
 import determineResult from './determine-result'
 import randomWeapon from './random-weapon'
+import { GameState, Weapon } from './state-types'
 import updateTotals from './update-totals'
+
+export * from './action-types'
+export * from './state-types'
 
 export const countdown = (value: number) : CountdownAction => ({ type: 'COUNTDOWN', value })
 export const draw = (aiWeapon: Weapon): DrawAction => ({ type: 'DRAW', aiWeapon })
@@ -22,25 +26,6 @@ export const playEpic = (action$: any) => action$.pipe(
     return concat(count, of(draw(randomWeapon())))
   })
 )
-
-export * from './action-types'
-export type Weapon = 'rock' | 'paper' | 'scissors'
-export type Result = 'WIN' | 'LOSE' | 'DRAW'
-
-export type Totals = {
-  wins: number
-  losses: number
-  draws: number
-}
-
-export type GameState = {
-  status: 'START' | 'COUNTING_DOWN' | 'FINISHED'
-  playerWeapon?: Weapon
-  aiWeapon?: Weapon
-  countdownValue?: number
-  result?: Result
-  totals: Totals
-}
 
 export const initialState : GameState = {
   status: 'START',
