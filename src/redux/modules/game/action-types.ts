@@ -1,13 +1,5 @@
 import { Weapon } from "./game"
 
-export type PingAction = {
-  type: 'PING'
-}
-
-export type PongAction = {
-  type: 'PONG'
-}
-
 export type PlayAction = {
   type: 'PLAY',
   weapon: Weapon
@@ -23,4 +15,4 @@ export type DrawAction = {
   aiWeapon: Weapon
 }
 
-export type Action = PingAction | PongAction | PlayAction | CountdownAction | DrawAction
+export type Action = PlayAction | CountdownAction | DrawAction
