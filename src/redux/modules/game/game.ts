@@ -17,10 +17,9 @@ export const playEpic = (action$: any) => action$.pipe(
   filter((action: Action) => action.type === 'PLAY'),
   switchMap(() => {
     const count = timer(0, 1000).pipe(
-        take(4),
-        map(x => 3 - x),
-        map(x => countdown(x)
-      )
+      take(4),
+      map(x => 3 - x),
+      map(x => countdown(x))
     )
 
     return concat(count, of(draw(randomWeapon())))
