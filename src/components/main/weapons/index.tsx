@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Weapon } from '../../../types'
-import { Result } from '../../../redux/modules/game/game'
+import { Weapon, Result } from '../../../redux/modules/game/game'
 import { Rock, Paper, Scissors } from './icons'
 
 export type WeaponViewProps = {

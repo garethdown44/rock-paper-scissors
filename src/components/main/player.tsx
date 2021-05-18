@@ -1,5 +1,4 @@
-import { Weapon } from '../../types'
-import { Result } from '../../redux/modules/game/game'
+import { Weapon, Result } from '../../redux/modules/game/game'
 import { Wrapper, PlayerBox, StyledHeading } from './primitives';
 import WeaponView from './weapons/index';
 import ReplayControls from './replay-controls';

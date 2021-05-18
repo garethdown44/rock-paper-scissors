@@ -1,7 +1,6 @@
 import Player from './player'
 import Ai from './ai'
-import { Result, Totals } from '../../redux/modules/game/game'
-import { Weapon } from '../../types'
+import { Weapon, Result, Totals } from '../../redux/modules/game/game'
 import styled from 'styled-components'
 import ResultIndicator from './result-indicator'
 import TotalView from './totals'

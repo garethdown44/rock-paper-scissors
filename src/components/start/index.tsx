@@ -1,4 +1,4 @@
-import { Weapon } from '../../types'
+import { Weapon } from '../../redux/modules/game/game'
 import Arsenal from './arsenal'
 import { Box, Instruction, WeaponsWrapper } from './primitives'
 

@@ -1,5 +1,4 @@
-import { Weapon } from "../../../types"
-import { Result } from "./game"
+import { Weapon, Result } from "./game"
 
 export default function determineResult(playerWeapon: Weapon, aiWeapon: Weapon): Result {
   if (playerWeapon === aiWeapon) {

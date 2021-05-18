@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Weapon } from '../../types'
-import { Result } from '../../redux/modules/game/game'
+import { Weapon, Result } from '../../redux/modules/game/game'
 import { Wrapper, AiBox, StyledHeading } from './primitives'
 import WeaponView from './weapons/index'
 

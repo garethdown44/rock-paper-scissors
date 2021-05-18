@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { Button } from '../common/primitives';
-import { Rock, Paper, Scissors } from '../common/index';
-import { Weapon } from '../../types';
+import { Button } from '../common/primitives'
+import { Rock, Paper, Scissors } from '../common/index'
+import { Weapon } from '../../redux/modules/game/game'
 
 export type Props = {
   play: (weapon: Weapon) => void

@@ -1,34 +1,9 @@
 import { concat, of, timer } from 'rxjs'
 import { filter, switchMap, map, take } from 'rxjs/operators'
-import { Weapon } from '../../../types'
+import { Action, CountdownAction, DrawAction, PlayAction } from './action-types'
 import determineResult from './determine-result'
 import randomWeapon from './random-weapon'
 import updateTotals from './update-totals'
-
-type PingAction = {
-  type: 'PING'
-}
-
-type PongAction = {
-  type: 'PONG'
-}
-
-type PlayAction = {
-  type: 'PLAY',
-  weapon: Weapon
-}
-
-type CountdownAction = {
-  type: 'COUNTDOWN',
-  value: number
-}
-
-type DrawAction = {
-  type: 'DRAW'
-  aiWeapon: Weapon
-}
-
-export type Action = PingAction | PongAction | PlayAction | CountdownAction | DrawAction
 
 export const countdown = (value: number) : CountdownAction => ({ type: 'COUNTDOWN', value })
 export const draw = (aiWeapon: Weapon): DrawAction => ({ type: 'DRAW', aiWeapon })
@@ -48,6 +23,8 @@ export const playEpic = (action$: any) => action$.pipe(
   })
 )
 
+export * from './action-types'
+export type Weapon = 'rock' | 'paper' | 'scissors'
 export type Result = 'WIN' | 'LOSE' | 'DRAW'
 
 export type Totals = {

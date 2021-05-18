@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { Weapon } from '../../types'
 import { Rock, Paper, Scissors } from './weapons'
 import { Button } from '../common/primitives'
+import { Weapon } from '../../redux/modules/game/game'
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 
 type Props = {
-  onShoot: (weapon: Weapon) => void  
+  onShoot: (weapon: Weapon) => void
 }
 
 export default function Weapons ({ onShoot }: Props) {

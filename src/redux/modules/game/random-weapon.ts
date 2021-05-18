@@ -1,4 +1,4 @@
-import { Weapon } from "../../../types"
+import { Weapon } from './game'
 
 const weapons: Weapon[] = ['rock', 'paper', 'scissors']
 

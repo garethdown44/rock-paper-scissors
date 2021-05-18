@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import MainContainer from './components/main-container'
-import { Action } from './redux/modules/game/game'
 import { AppState } from './redux/store'
+import { Action } from './redux/modules/game/game'
 import { Dispatch } from 'redux'
-import { Game } from './game';
+import { Game } from './game'
 
 function App() {
   const gameState = useSelector((state: AppState) => state.game)
