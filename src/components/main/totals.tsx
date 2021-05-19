@@ -9,7 +9,6 @@ export type Props = {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  font-family: Helvetica Neue;
   font-size: 35px;
   letter-spacing: 0px;
   color: #333;

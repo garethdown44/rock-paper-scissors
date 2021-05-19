@@ -10,7 +10,6 @@ export type Props = {
 }
 
 const CountdownValue = styled.div`
-  font-family: Helvetica Neue;
   font-size: 200px;
   letter-spacing: 0px;
   color: #4C9BDE;

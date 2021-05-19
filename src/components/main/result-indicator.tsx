@@ -6,7 +6,6 @@ type Props = {
 }
 
 const StyledDiv = styled.div < { isVisible: boolean }>`
-  font-family: Helvetica Neue;
   font-weight: 500;
   font-size: 60px;
   letter-spacing: 0px;

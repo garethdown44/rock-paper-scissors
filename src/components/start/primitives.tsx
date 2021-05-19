@@ -13,7 +13,6 @@ export const Box = styled.div`
 
 export const Instruction = styled.div`
   text-align: center;
-  font-family: Helvetica Neue;
   font-weight: 300;
   font-size: 44px;
   letter-spacing: 0px;
